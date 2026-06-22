@@ -57,7 +57,7 @@ async def paginate_link_pages(
     update-sorted lists can stop early at a watermark."""
     next_url: str | None = url
     while next_url:
-        response = await http.get(next_url, headers=headers)
+        response = await http.get(next_url, headers=headers, timeout=30.0)
         check_response(response, forge_name)
         data = response.json()
         yield data[subkey] if subkey else data
